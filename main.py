@@ -1,45 +1,44 @@
+from venv import create
+from Program.ControlUser import UserControlMatrix
+from Program.ControlData import insert_matrix
+from time import sleep
 
-"""
+import enquiries
+import json
+import os
 
-Matrix example
---> rows: 5
---> columns: 4
 
-      0  1  2  3
-0 - [ 0, 0, 0, 0 ]
-1 - [ 0, 0, 0, 0 ]
-2 - [ 0, 0, 0, 0 ]
-3 - [ 0, 0, 0, 0 ]
-4 - [ 0, 0, 0, 0 ]
+# options = ['thing 1', 'thing 2', 'thing 3']
+# choice = enquiries.choose('Choose one of these options: ', options)
 
-"""
+# if enquiries.confirm('Do you want to write something?'):
+#     text = enquiries.freetext('Write something interesting: ')
+#     print(text)
 
-from Matrix.Matrix import Matrix
-from Matrix.Identity import Identity
 
-from Operations.MultiplyMatrix import multiply_matrix
-from Operations.MultiplyNumber import multiply_number
+
+main_options = ['create_matrix', 'edit_matrix', 'do_operation', 'close']
 
 
 if __name__ == '__main__':
-    m1 = Matrix(3, 2, 5)
-    m2 = Matrix(2, 3, 8)
+    try:
+        controller = UserControlMatrix()
+        a = controller.create_new_matrix()
 
-    r1 = multiply_matrix(m1, m2)
-    r2 = multiply_number(m1, 4)
+        insert_matrix(a)
 
-    m3 = Identity(5)
+        # actions_control =  {
+        #     'create_matrix': controller.create_new_matrix,
+        #     'edit_matrix': controller.edit_matrix,
+        # }
 
-    print('Matrix one')
-    m1.print_matrix()
-
-    print('Matrix tree')
-    m3.print_matrix()
-
-
-    print('Matrix r1')
-    r1.print_matrix()
-
-    print('Matrix r2')
-    r2.print_matrix()
+        # while True:
+        #     choice = enquiries.choose('Choose one of these options: ', main_options)
+        #     if choice == 'close':
+        #         break
+        #     else:
+        #         actions_control.get(choice)()
+    
+    except Exception as e:
+        print('Something went wrong. Please try again. \n{}'.format(e))
 
