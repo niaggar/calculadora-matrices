@@ -1,13 +1,15 @@
 import sqlite3
-import json 
+import json
 import os
 
 from Matrix.Matrix import Matrix
 
+conn = None
 
 
 def create_connection() -> sqlite3.Connection:
     """ create a database connection to a SQLite database """
+    global conn
 
     conn = None
     route = os.getcwd()
@@ -19,12 +21,13 @@ def create_connection() -> sqlite3.Connection:
         print(e)
     finally:
         return conn
-    
+
 
 def insert_matrix(m: Matrix):
+    global conn
     try:
         conn = create_connection()
-        
+
         if conn is None:
             print('Error! Cannot create the connection.')
             return
@@ -41,7 +44,7 @@ def insert_matrix(m: Matrix):
 
     except sqlite3.Error as error:
         print("Failed to insert Python variable into sqlite table", error)
-        
+
     finally:
         if conn:
             conn.close()
@@ -49,13 +52,15 @@ def insert_matrix(m: Matrix):
 
 
 def get_matrix(id: int) -> Matrix:
+    global conn
+
     try:
         conn = create_connection()
 
         if conn is None:
-            print('Error! Cannot create the connection.')                                                                                                            
+            print('Error! Cannot create the connection.')
             return
-        
+
         cursor = conn.cursor()
         param = """SELECT * FROM MatrixTable WHERE id = ?;"""
         data = (id,)
@@ -66,7 +71,7 @@ def get_matrix(id: int) -> Matrix:
         if row is None:
             print('Matrix not found')
             return
-        
+
         matrix = Matrix(row[2], row[1], row[0], json.loads(row[3]))
         return matrix
 
@@ -77,4 +82,3 @@ def get_matrix(id: int) -> Matrix:
         if conn:
             conn.close()
             print("The SQLite connection is closed")
-    
