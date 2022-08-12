@@ -8,7 +8,6 @@ conn = None
 
 
 def create_connection() -> sqlite3.Connection:
-    """ create a database connection to a SQLite database """
     global conn
 
     conn = None
@@ -51,7 +50,7 @@ def insert_matrix(m: Matrix):
             print("The SQLite connection is closed")
 
 
-def get_matrix(id: int) -> Matrix:
+def get_matrix(matrix_id: int) -> Matrix | None:
     global conn
 
     try:
@@ -63,7 +62,7 @@ def get_matrix(id: int) -> Matrix:
 
         cursor = conn.cursor()
         param = """SELECT * FROM MatrixTable WHERE id = ?;"""
-        data = (id,)
+        data = (matrix_id,)
         cursor.execute(param, data)
         row = cursor.fetchone()
         cursor.close()

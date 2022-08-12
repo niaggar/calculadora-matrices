@@ -10,9 +10,6 @@ class UserControlMatrix:
 
     @staticmethod
     def create_new_matrix() -> Matrix:
-        """
-        Create a new matrix with the rows, columns and values given by the user.
-        """
         system('cls')
 
         name = input('Enter the name of the matrix: ').upper()
@@ -34,10 +31,8 @@ class UserControlMatrix:
 
         return new_matrix
 
-    def edit_matrix(self, matrix: Matrix) -> Matrix:
-        """
-        Edit the values of the matrix.
-        """
+    @staticmethod
+    def edit_matrix(matrix: Matrix) -> Matrix:
         system('cls')
 
         rows = matrix.rows

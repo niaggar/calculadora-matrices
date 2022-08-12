@@ -13,7 +13,7 @@ class NumberValidator(Validator):
 class TextValidator(Validator):
     def validate(self, document):
         if len(document.text) == 0:
-            raise ValidationError(message='This input contains non-numeric characters')
+            raise ValidationError(message='This input is empty')
 
 
 def get_prompt_number(text: str) -> float:

@@ -6,7 +6,6 @@ class Matrix:
         self.name = name
         self.matrix = self.create_matrix(fill)
 
-
     def create_matrix(self, fill):
         new_matrix = []
         for r in range(self.rows):
@@ -16,7 +15,6 @@ class Matrix:
                 new_matrix[r].append(fill)
 
         return new_matrix
-
 
     def print_matrix(self):
         str_matrix = f'{"-" * self.columns * 6}\n'
