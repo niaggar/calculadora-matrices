@@ -14,4 +14,3 @@ if __name__ == '__main__':
     except Exception as e:
         print('Something went wrong. Please try again. \n{}'.format(e))
 
-
